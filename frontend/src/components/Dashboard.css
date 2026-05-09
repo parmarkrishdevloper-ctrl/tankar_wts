@@ -1,0 +1,431 @@
+/* Dashboard Container */
+.dashboard {
+    padding: 84px 2rem 2rem 2rem;
+    min-height: 100vh;
+    background: #f1f5f9;
+    /* Professional light gray background from reference */
+    position: relative;
+    font-family: 'Inter', sans-serif;
+}
+
+.dashboard::before {
+    display: none;
+    /* Remove background blobs */
+}
+
+.dashboard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1.5rem;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    margin-bottom: 3.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-header h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+    text-shadow: none;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+}
+
+.dashboard-header .subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+/* KPI Grid - Top Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.kpi-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.kpi-card.primary::before {
+    background: #2563eb;
+}
+
+.kpi-card.success::before {
+    background: #10b981;
+}
+
+.kpi-card.info::before {
+    background: #3b82f6;
+}
+
+.kpi-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 16px 48px rgba(37, 99, 235, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.kpi-card:hover::before {
+    transform: scaleX(1);
+}
+
+.kpi-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.kpi-icon {
+    font-size: 1.25rem;
+    color: #3b82f6;
+    padding: 0.5rem;
+    background: #eff6ff;
+    border-radius: 8px;
+}
+
+.kpi-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.kpi-value {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.kpi-trend.positive {
+    color: #10b981;
+}
+
+.kpi-trend svg {
+    font-size: 1rem;
+}
+
+/* Analytics Section */
+.analytics-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+}
+
+.section-header svg {
+    font-size: 2rem;
+    color: #2563eb;
+}
+
+.section-header h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* Status Analytics */
+.status-analytics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.status-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.status-info {
+    margin-bottom: 1.5rem;
+}
+
+.status-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-icon {
+    font-size: 2rem;
+    padding: 0.75rem;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+.status-icon.pending {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.status-icon.progress {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.status-icon.approved {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.status-icon.disbursed {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.status-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.01em;
+}
+
+.status-header p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    font-weight: 500;
+}
+
+.status-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(226, 232, 240, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+}
+
+.progress-fill.pending {
+    background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.progress-fill.progress {
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.progress-fill.approved {
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.progress-fill.disbursed {
+    background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.progress-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Spinner */
+/* Modern Loader */
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #e2e8f0;
+    border-bottom-color: #2563eb;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error Message */
+.error-message {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.1);
+    font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpi-card,
+.analytics-section {
+    animation: fadeIn 0.6s ease-out backwards;
+}
+
+.kpi-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.kpi-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.kpi-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.analytics-section {
+    animation-delay: 0.4s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 90px 1rem 1rem 1rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .dashboard-header .subtitle {
+        font-size: 1rem;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .kpi-value {
+        font-size: 2.5rem;
+    }
+
+    .analytics-section {
+        padding: 1.5rem;
+    }
+
+    .status-analytics {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+}
