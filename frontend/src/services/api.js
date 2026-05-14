@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000'; // Adjust for your backend URL
+const API_BASE_URL = 'https://tankarsolutions.tech'; // Adjust for your backend URL
 const API2 = "api"
 
 const api = axios.create({
