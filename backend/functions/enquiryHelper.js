@@ -2,25 +2,22 @@ const Enquiry = require('../models/Enquiry');
 const { extractDataWithAI } = require('./llmDataExtractor');
 
 function applyParsedData(enquiry, data = {}) {
-    if (data.clientName) enquiry.clientName = data.clientName;
-    if (data.email) enquiry.email = data.email;
     if (data.businessName) enquiry.businessName = data.businessName;
     if (data.websiteType) enquiry.websiteType = data.websiteType;
+    if (data.pagesCount) enquiry.pagesCount = data.pagesCount;
+    if (data.domainStatus) enquiry.domainStatus = data.domainStatus;
+    if (data.stylePreference) enquiry.stylePreference = data.stylePreference;
     if (data.timeline) enquiry.timeline = data.timeline;
-    if (data.existingWebsite) enquiry.existingWebsite = data.existingWebsite;
-    if (data.targetAudience) enquiry.targetAudience = data.targetAudience;
-    if (data.coreFeature) enquiry.coreFeature = data.coreFeature;
-    if (data.features) enquiry.features = data.features;
-    if (data.budget) enquiry.budget = data.budget;
+    if (data.email) enquiry.email = data.email;
+    if (data.conversationStage) enquiry.conversationStage = data.conversationStage;
 }
 
 function hasAllPrimaryFields(enquiry) {
     return Boolean(
-        enquiry.clientName &&
+        enquiry.businessName &&
         enquiry.websiteType &&
-        enquiry.email &&
-        enquiry.timeline &&
-        enquiry.coreFeature
+        enquiry.pagesCount &&
+        enquiry.domainStatus
     );
 }
 
@@ -64,10 +61,8 @@ async function upsertEnquiryFromMessage(phoneNumber, messageText) {
 
         if (hasAllPrimaryFields(enquiry)) {
             enquiry.status = 'completed';
-            enquiry.conversationStage = 'completed';
         } else {
             enquiry.status = 'in_progress';
-            enquiry.conversationStage = 'collecting';
         }
 
         await enquiry.save();
@@ -95,16 +90,13 @@ async function resetEnquiry(phoneNumber) {
         const enquiry = await getOrCreateEnquiry(phoneNumber);
         enquiry.status = 'new';
         enquiry.conversationStage = 'greeting';
-        enquiry.clientName = null;
-        enquiry.email = null;
         enquiry.businessName = null;
         enquiry.websiteType = null;
+        enquiry.pagesCount = null;
+        enquiry.domainStatus = null;
+        enquiry.stylePreference = null;
         enquiry.timeline = null;
-        enquiry.existingWebsite = null;
-        enquiry.targetAudience = null;
-        enquiry.coreFeature = null;
-        enquiry.features = null;
-        enquiry.budget = null;
+        enquiry.email = null;
         await enquiry.save();
         return enquiry;
     } catch (error) {

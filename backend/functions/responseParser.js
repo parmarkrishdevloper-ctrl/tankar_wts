@@ -8,7 +8,8 @@ function isUserDisinterested(text, conversationHistory = []) {
     const disinterestKeywords = [
         'no thanks', 'not interested', 'don\'t want', 'no need', 'cancel',
         'stop', 'later', 'bye', 'goodbye', 'talk to you later',
-        'call me later', 'not now', 'maybe later', 'another time'
+        'call me later', 'not now', 'maybe later', 'another time',
+        'nahi chahiye', 'rehne do', 'baad me', 'bad me', 'nahi', 'no'
     ];
 
     if (disinterestKeywords.some(keyword => lowerText.includes(keyword))) {

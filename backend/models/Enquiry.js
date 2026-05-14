@@ -10,7 +10,10 @@ const enquirySchema = new mongoose.Schema({
     clientName: { type: String, default: null },
     email: { type: String, default: null },
     businessName: { type: String, default: null },
-    websiteType: { type: String, default: null }, // E-commerce, Portfolio, Blog, Business, etc.
+    websiteType: { type: String, default: null }, // Business type
+    pagesCount: { type: String, default: null },
+    domainStatus: { type: String, default: null }, // e.g., Already has domain, Need new domain
+    stylePreference: { type: String, default: null }, // Style from portfolio
     timeline: { type: String, default: null },
     existingWebsite: { type: String, default: null },
     targetAudience: { type: String, default: null },

@@ -39,12 +39,13 @@ Your task is to extract structured information from the user's message and retur
 - clientName: The full name of the user.
 - email: The professional email address of the user.
 - businessName: The name of the user's business or brand.
-- websiteType: Type of website (e.g., Corporate Business, AI Tool, E-commerce, Portfolio).
-- timeline: Expected completion time or deadline.
-- existingWebsite: URL or mention of an existing website or reference.
-- targetAudience: Description of who the website is for.
-- coreFeature: The most important or crucial feature requested.
+- websiteType: Type of business or website (e.g., Real Estate, E-commerce, Gym).
+- pagesCount: Number of pages requested (e.g., 5, Home/About/Contact).
+- domainStatus: Whether they have a domain or need one (e.g., "Already has", "Naya lena hai").
+- stylePreference: Which style they liked from the samples.
 - intent: Set to "new_consultation" if they want to start over.
+- language: The language used by the user (e.g., "Hindi", "English", "Hinglish").
+- conversationStage: The current stage of the conversation based on the flow (greeting, business_type, project_details, package, portfolio, closing).
 
 -----------------------------------
 ⚠️ SPECIAL HANDLING RULES

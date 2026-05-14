@@ -162,45 +162,15 @@ app.post("/webhook", async (req, res) => {
     }
 
     if (isUserDisinterested(userText, conversationHistory)) {
-      const goodbyeMessage = "No problem. Our team will reach out to you very soon if you need any help with your website. Thank you! 🚀";
+      console.log(`📉 [DISINTERESTED] User ${from} seems disinterested.`);
       await createCallbackRequest(from);
-
-      try {
-        await saveContact(from);
-        await saveConversation(
-          from,
-          userText,
-          goodbyeMessage,
-          estimateTokens(userText),
-          estimateTokens(goodbyeMessage)
-        );
-      } catch (dbError) {
-        console.error("Database save error:", dbError.message);
-      }
-
-      await sendWhatsAppMessage(from, goodbyeMessage, WHATSAPP_TOKEN, PHONE_NUMBER_ID);
-      return;
+      // Let the AI handle the final goodbye in the user's language
     }
 
-    if (upsertResult.hasAllPrimaryFields) {
-      await updateEnquiryData(from, "review", {});
-      const finalMessage = `🎉 Thank you!\nWe have received all your details.\nOur website consultant will review your information and contact you shortly to discuss your project.\n\n🚀 *Tankar Solution*`;
-
-      try {
-        await saveContact(from);
-        await saveConversation(
-          from,
-          userText,
-          finalMessage,
-          estimateTokens(userText),
-          estimateTokens(finalMessage)
-        );
-      } catch (dbError) {
-        console.error("Database save error:", dbError.message);
-      }
-
-      await sendWhatsAppMessage(from, finalMessage, WHATSAPP_TOKEN, PHONE_NUMBER_ID);
-      return;
+    if (upsertResult.hasAllPrimaryFields && enquiry.status !== 'completed') {
+      console.log(`✅ [COMPLETE] All primary fields collected for ${from}.`);
+      await updateEnquiryData(from, "review", { status: 'completed' });
+      // We don't return here anymore, let the AI send the package details and continue the flow
     }
 
     const stageForPrompt = enquiry.conversationStage || "greeting";
