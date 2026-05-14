@@ -292,12 +292,6 @@ const Conversations = ({ selectedContact, onSelectContact, onBack }) => {
                                                                 <span className="message-time">
                                                                     {formatTime(message.timestamp)}
                                                                 </span>
-                                                                {(message.inputTokens > 0 || message.outputTokens > 0) && (
-                                                                    <span className="message-tokens">
-                                                                        {message.inputTokens > 0 && `${formatNumber(message.inputTokens)} in`}
-                                                                        {message.outputTokens > 0 && ` ${formatNumber(message.outputTokens)} out`}
-                                                                    </span>
-                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>
