@@ -58,6 +58,25 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 /**
+ * GET /api/enquiries/by-phone/:phoneNumber
+ * Return the most recent enquiry associated with a phone number (or null)
+ */
+router.get('/by-phone/:phoneNumber', authMiddleware, async (req, res) => {
+    try {
+        const Enquiry = require('../models/Enquiry');
+        const enquiry = await Enquiry.findOne({ phoneNumber: req.params.phoneNumber })
+            .sort({ createdAt: -1 });
+        res.json({ success: true, data: enquiry });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to fetch enquiry',
+            error: error.message
+        });
+    }
+});
+
+/**
  * GET /api/enquiries/:id
  * Get specific enquiry by ID
  */
@@ -123,6 +142,29 @@ router.put('/:id/status', authMiddleware, async (req, res) => {
             message: 'Failed to update enquiry status',
             error: error.message
         });
+    }
+});
+
+/**
+ * PUT /api/enquiries/:id/tags
+ * Replace tags on an enquiry
+ */
+router.put('/:id/tags', authMiddleware, async (req, res) => {
+    try {
+        const { tags } = req.body;
+        if (!Array.isArray(tags)) {
+            return res.status(400).json({ success: false, message: 'tags must be an array' });
+        }
+        const Enquiry = require('../models/Enquiry');
+        const enquiry = await Enquiry.findByIdAndUpdate(
+            req.params.id,
+            { tags: tags.map((t) => String(t).trim()).filter(Boolean) },
+            { new: true }
+        );
+        if (!enquiry) return res.status(404).json({ success: false, message: 'Enquiry not found' });
+        res.json({ success: true, data: enquiry });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to update tags', error: error.message });
     }
 });
 

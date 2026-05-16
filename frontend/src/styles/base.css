@@ -1,0 +1,143 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--c-text);
+  background: var(--c-bg);
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--fw-semibold);
+  line-height: var(--leading-tight);
+  color: var(--c-text);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--text-3xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-2xl); letter-spacing: -0.02em; }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+
+p {
+  margin: 0;
+  color: var(--c-text-muted);
+}
+
+a {
+  color: var(--c-brand);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--c-brand-hover);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--c-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-text-subtle);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--c-brand-soft);
+  color: var(--c-brand-text);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-8);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+}
+
+.page-title h1 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-1);
+}
+
+.page-title p {
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .app-content {
+    padding: var(--space-4);
+  }
+}

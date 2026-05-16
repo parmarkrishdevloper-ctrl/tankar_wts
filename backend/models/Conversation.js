@@ -46,6 +46,10 @@ const conversationSchema = new mongoose.Schema({
     lastMessageAt: {
         type: Date,
         default: Date.now
+    },
+    aiSummary: {
+        text: { type: String, default: '' },
+        generatedAt: { type: Date }
     }
 }, {
     timestamps: true
