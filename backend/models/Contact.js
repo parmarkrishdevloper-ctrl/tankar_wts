@@ -31,7 +31,28 @@ const contactSchema = new mongoose.Schema({
         type: Map,
         of: String,
         default: {}
-    }
+    },
+    botPaused: {
+        type: Boolean,
+        default: false
+    },
+    botPausedAt: {
+        type: Date
+    },
+    botPausedTotalCount: {
+        type: Number,
+        default: 0
+    },
+    notes: {
+        type: String,
+        default: ''
+    },
+    followupsSent: [
+        {
+            sequenceId: { type: mongoose.Schema.Types.ObjectId, ref: 'FollowupSequence' },
+            sentAt: { type: Date, default: Date.now }
+        }
+    ]
 }, {
     timestamps: true
 });
